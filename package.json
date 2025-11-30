@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/michelescara/michelescara.github.io/issues"
   },
-  "homepage": "https://github.com/michelescara/michelescara.github.io#readme"
+  "homepage": "https://github.com/michelescara/michelescara.github.io#readme",
+  "dependencies": {
+    "astro": "^5.16.3"
+  }
 }

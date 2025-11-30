@@ -62,10 +62,12 @@ Previews the production build locally.
 
 ```
 src/
+├── components/      # Reusable Astro components
+├── layouts/         # Layout templates
 ├── pages/           # Page routes (index.astro)
-├── scripts/         # Global scripts
+├── scripts/         # Global JavaScript
 └── styles/          # Global CSS styles
-public/              # Static assets (styles, scripts)
+public/              # Static assets
 astro.config.mjs     # Astro configuration
 ```
 

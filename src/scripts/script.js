@@ -21,10 +21,10 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = 'var(--shadow)';
+    if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled');
     }
 
     lastScroll = currentScroll;
@@ -101,54 +101,8 @@ function updateActiveNavLink() {
 
 window.addEventListener('scroll', updateActiveNavLink);
 
-// Typing effect for hero title (optional enhancement)
-const heroTitle = document.querySelector('.hero-title');
-if (heroTitle) {
-    const text = heroTitle.innerHTML;
-    heroTitle.innerHTML = '';
-    heroTitle.style.opacity = '1';
+// Project cards and Skill cards hover effects are handled in CSS
 
-    let charIndex = 0;
-    const typingSpeed = 50;
-
-    function typeText() {
-        if (charIndex < text.length) {
-            heroTitle.innerHTML = text.slice(0, charIndex + 1);
-            charIndex++;
-            setTimeout(typeText, typingSpeed);
-        }
-    }
-
-    // Uncomment to enable typing effect
-    // setTimeout(typeText, 500);
-
-    // Keep original text (comment out if using typing effect)
-    heroTitle.innerHTML = text;
-}
-
-// Project cards hover effect enhancement
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.borderColor = 'var(--primary-color)';
-    });
-
-    card.addEventListener('mouseleave', function() {
-        this.style.borderColor = 'var(--border-color)';
-    });
-});
-
-// Skill cards animation on hover
-const skillCards = document.querySelectorAll('.skill-card');
-skillCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.borderColor = 'var(--primary-color)';
-    });
-
-    card.addEventListener('mouseleave', function() {
-        this.style.borderColor = 'var(--border-color)';
-    });
-});
 
 // Log welcome message to console
 console.log('%c👋 Welcome to my portfolio!', 'font-size: 20px; font-weight: bold; color: #3b82f6;');

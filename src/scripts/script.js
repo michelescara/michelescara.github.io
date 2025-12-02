@@ -21,10 +21,10 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = 'var(--shadow)';
+    if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled');
     }
 
     lastScroll = currentScroll;
@@ -101,10 +101,15 @@ function updateActiveNavLink() {
 
 window.addEventListener('scroll', updateActiveNavLink);
 
-// Typing effect for hero title (optional enhancement)
+// Typing effect for hero title
 const heroTitle = document.querySelector('.hero-title');
 if (heroTitle) {
-    const text = heroTitle.innerHTML;
+    // Extract the text parts
+    const beforeHighlight = "Hi, I'm ";
+    const highlightText = "Michele Scaramuzzino";
+    const fullText = beforeHighlight + highlightText;
+
+    // Clear the title
     heroTitle.innerHTML = '';
     heroTitle.style.opacity = '1';
 
@@ -112,43 +117,30 @@ if (heroTitle) {
     const typingSpeed = 50;
 
     function typeText() {
-        if (charIndex < text.length) {
-            heroTitle.innerHTML = text.slice(0, charIndex + 1);
+        if (charIndex < fullText.length) {
+            const currentText = fullText.slice(0, charIndex + 1);
+
+            // Check if we've reached the highlight part
+            if (charIndex < beforeHighlight.length) {
+                // Still typing the first part
+                heroTitle.innerHTML = currentText;
+            } else {
+                // Typing the highlighted part
+                const highlightPart = currentText.slice(beforeHighlight.length);
+                heroTitle.innerHTML = beforeHighlight + '<span class="highlight">' + highlightPart + '</span>';
+            }
+
             charIndex++;
             setTimeout(typeText, typingSpeed);
         }
     }
 
-    // Uncomment to enable typing effect
-    // setTimeout(typeText, 500);
-
-    // Keep original text (comment out if using typing effect)
-    heroTitle.innerHTML = text;
+    // Enable typing effect
+    setTimeout(typeText, 500);
 }
 
-// Project cards hover effect enhancement
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.borderColor = 'var(--primary-color)';
-    });
+// Project cards and Skill cards hover effects are handled in CSS
 
-    card.addEventListener('mouseleave', function() {
-        this.style.borderColor = 'var(--border-color)';
-    });
-});
-
-// Skill cards animation on hover
-const skillCards = document.querySelectorAll('.skill-card');
-skillCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.borderColor = 'var(--primary-color)';
-    });
-
-    card.addEventListener('mouseleave', function() {
-        this.style.borderColor = 'var(--border-color)';
-    });
-});
 
 // Log welcome message to console
 console.log('%c👋 Welcome to my portfolio!', 'font-size: 20px; font-weight: bold; color: #3b82f6;');

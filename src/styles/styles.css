@@ -447,9 +447,10 @@ section {
 
 /* Skills Section */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2.5rem;
+    justify-content: center;
 }
 
 .skill-card {
@@ -461,6 +462,7 @@ section {
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
+    flex: 0 1 350px;
 }
 
 .skill-card::before {

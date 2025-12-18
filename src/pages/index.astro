@@ -1,5 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+// Fetch GitHub repositories
+const response = await fetch(`https://api.github.com/users/${import.meta.env.GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
+const repos = await response.json();
+
+// Filter and sort repositories (exclude forks, sort by stars)
+const projects = repos
+    .filter((repo: any) => !repo.fork && !repo.archived)
+    .sort((a: any, b: any) => b.stargazers_count - a.stargazers_count);
 ---
 
 <Layout title="Michele Scaramuzzino | Software Developer">
@@ -48,6 +58,30 @@ import Layout from '../layouts/Layout.astro';
                         opportunities to grow professionally.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p class="projects-subtitle">
+                Here are some of my recent projects from GitHub
+            </p>
+            <div class="projects-grid">
+                {projects.map((project: any) => (
+                        <ProjectCard
+                                name={project.name}
+                                description={project.description}
+                                html_url={project.html_url}
+                                homepage={project.homepage}
+                                topics={project.topics}
+                                language={project.language}
+                                stargazers_count={project.stargazers_count}
+                                forks_count={project.forks_count}
+                        />
+                ))}
             </div>
         </div>
     </section>
